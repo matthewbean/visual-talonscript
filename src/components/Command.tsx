@@ -21,7 +21,8 @@ interface Action{
     value:any,
     uuid:String,
     modifiers:Object,
-    type: String
+    type: String,
+    key?: any
 
 }
 interface InfoObject{
