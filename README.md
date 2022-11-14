@@ -1,6 +1,6 @@
 # Visual Talonscript
 
-## What is Talon?
+## What is Talon
 
 According to [talonvoice.com](https://www.talonvoice.com):
 
@@ -14,7 +14,7 @@ Essentially Talon is a program that allows the user to control their computer wi
 
 ## How do I set up talon?
 
-Instructions on how to set up this program can be found [here][https://talonvoice.com/docs/]. There is also an an official community wiki [here](https://talon.wiki/getting_started/)
+Instructions on how to set up this program can be found [here](https://talonvoice.com/docs/). There is also an an official community wiki [here](https://talon.wiki/getting_started/)
 
 ## What can't this aplication do?
 
