@@ -1,6 +1,6 @@
 # Visual Talonscript
 
-## What is Talon
+## What is Talon?
 
 According to [talonvoice.com](https://www.talonvoice.com):
 
