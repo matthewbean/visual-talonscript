@@ -20,12 +20,12 @@ Instructions on how to set up this program can be found [here](https://talonvoic
 
 This program is in no way an attempt to completely remove the need to write things in Talon Script. Talon Script is a rich and complex language that allows you to do just about anything. This tool is for those who either only need basic functionality or who are newer to the project and would like to quickly make some basic commands.
 
-## What commands can this application create?
+## What actions can this application create?
 
 - Type Text
-- Press a key
-- Hold down a key
-- release a key
+- Press a Key
+- Hold Down a Key
+- Release a Key
 - Move Cursor
 - Left Click, Right Click, Drag, Release, Double Click, Triple Click
 - Delay
