@@ -33,6 +33,7 @@ export default function PrintModal() {
     setOpen(true)
   }
 
+
   return (
     <div>
       <Button variant="outlined" startIcon={<PrintIcon />} onClick={handleOpen}>Create Document</Button>
@@ -44,10 +45,13 @@ export default function PrintModal() {
       >
         <>
         <Box sx={style} >
+        <Button sx={{ mb:2, position:"absolute", left: 32}} onClick={()=>handleClose()} variant="outlined">
+                Close
+        </Button>
         <Button sx={{ mb:2, position:"absolute", right: 32}} onClick={()=>copyCommands()} variant="contained">
                 Copy Text
             </Button>
-        <div dangerouslySetInnerHTML={{__html:print}}>
+        <div style={{marginTop:"50px"}} dangerouslySetInnerHTML={{__html:print}}>
           </div>
         
         </Box>
