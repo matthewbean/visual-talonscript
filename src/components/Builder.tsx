@@ -7,7 +7,6 @@ import {StateTypes} from '../types/StateTypes'
 export default function Builder(props) {
     const appContext=useContext(AppContext)
     const { current, setCurrent, editAction, editModifier, moveUpCommand, editCommand, deleteAction, moveDownCommand, deleteCommand }: StateTypes = appContext
-    console.log(appContext)
     return (
         <>
         <h2>Current Command:</h2>
