@@ -1,8 +1,7 @@
-import { useState } from 'react'
 
 import './App.css'
 
-
+import React from 'react';
 import AppState from './context/AppState'
 import Board from './components/Board'
 import NavBar from './components/NavBar'
@@ -17,7 +16,6 @@ const darkTheme = createTheme({
 });
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <ThemeProvider theme={darkTheme}>
