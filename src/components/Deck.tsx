@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { Key, useContext } from 'react'
 import AppContext from '../context/appContext';
 
 import Button from '@mui/material/Button';
@@ -11,10 +11,12 @@ import KeyboardHideOutlinedIcon from '@mui/icons-material/KeyboardHideOutlined';
 import MouseOutlinedIcon from '@mui/icons-material/MouseOutlined';
 import { motion, AnimatePresence } from "framer-motion";
 
+import { StateTypes } from '../types/StateTypes';
+
 
 export default function Deck(props) {
     const appContext = useContext(AppContext);
-    const { createAction, current }:any = appContext
+    const { createAction, current }:StateTypes = appContext
 
     return (
         <>
@@ -22,7 +24,7 @@ export default function Deck(props) {
             <AnimatePresence>
             {current&&
         <motion.div 
-        key={"buttons" as any}
+        key={"buttons" as Key}
         initial={{ opacity:0 }}
         animate={{ opacity:1 }}
         exit={{opacity:0}}>

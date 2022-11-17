@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 interface Props { 
     value: String,
     uuid: String,
-    current:  Boolean,
+    active:  Boolean,
     editAction: Function,
     deleteAction: Function,
     moveUpCommand:Function,
@@ -19,14 +19,14 @@ interface Props {
     }
 
 
-export default function Text({moveUpCommand, value, moveDownCommand, uuid, current, editAction, deleteAction }:Props) {
+export default function Text({moveUpCommand, value, moveDownCommand, uuid, active, editAction, deleteAction }:Props) {
     
 
     return (
         <>
-        {current?(
+        {active?(
             <motion.li layout
-            key={"animation"+uuid as any}
+            key={"animation"+uuid}
             initial={{ opacity:0, height:0 }}
             animate={{ opacity:1, height:'auto' }}
             exit={{ opacity:0, height:0 }}>

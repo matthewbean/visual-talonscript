@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Key } from 'react'
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
@@ -15,21 +15,21 @@ interface Value{
 interface Props { 
     value: Value,
     uuid: String,
-    current:  Boolean,
+    active:  Boolean,
     editAction: Function,
     deleteAction: Function,
     moveUpCommand:Function,
     moveDownCommand:Function
     }
 
-export default function Text({ value, uuid, current, editAction, deleteAction, moveDownCommand, moveUpCommand }:Props) {
+export default function Text({ value, uuid, active, editAction, deleteAction, moveDownCommand, moveUpCommand }:Props) {
     const { x, y }=value
 
     return (
         <>
-        {current?(
+        {active?(
         <motion.li layout
-        key={"animation"+uuid as any}
+        key={"animation"+uuid as Key}
         initial={{ opacity:0, height:0 }}
         animate={{ opacity:1, height:'auto' }}
         exit={{ opacity:0, height:0 }}>

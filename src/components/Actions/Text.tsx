@@ -12,7 +12,7 @@ import { motion } from "framer-motion";
 interface MessageProps { 
     value: String,
     uuid: String,
-    current:  Boolean,
+    active:  Boolean,
     editAction: Function,
     deleteAction: Function,
     moveUpCommand:Function,
@@ -21,13 +21,13 @@ interface MessageProps {
 
 
 
-export default function Text({ value, uuid, current, editAction, deleteAction, moveUpCommand, moveDownCommand }:MessageProps) {
+export default function Text({ value, uuid, active, editAction, deleteAction, moveUpCommand, moveDownCommand }:MessageProps) {
     
 
     return (
         <>
         
-        {current?(
+        {active?(
             <motion.li layout
             key={"animation"+uuid as any}
             initial={{ opacity:0, height:0 }}

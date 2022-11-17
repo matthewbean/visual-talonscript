@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Key } from 'react'
 
 import IconButton from '@mui/material/IconButton';
 import Grid from '@mui/material/Unstable_Grid2';
@@ -15,21 +15,21 @@ import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 interface Props { 
     value: String,
     uuid: String,
-    current:  Boolean,
+    active:  Boolean,
     editAction: Function,
     deleteAction: Function,
     moveUpCommand:Function,
     moveDownCommand:Function
     }
 
-export default function KeyUp({moveUpCommand, uuid, value, current, editAction, moveDownCommand, deleteAction }:Props) {
+export default function KeyUp({moveUpCommand, uuid, value, active, editAction, moveDownCommand, deleteAction }:Props) {
     
 
     return (
         <>
-        {   current?
+        {   active?
             (<motion.li layout
-            key={"animation"+uuid as any}
+            key={"animation"+uuid as Key}
             initial={{opacity:0, height:0 }}
             animate={{ opacity:1, height:'auto' }}
             exit={{ opacity:0, height:0 }}>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Key as key} from 'react'
 import TextField from '@mui/material/TextField'
 import IconButton from '@mui/material/IconButton'
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
@@ -16,24 +16,14 @@ import MoveMouse from './Actions/MoveMouse';
 import MouseClick from './Actions/MouseClick';
 import { motion, AnimatePresence } from "framer-motion";
 
+import {  Current, Legend } from '../types/StateTypes'
 
-interface Action{
-    value:any,
-    uuid:String,
-    modifiers:Object,
-    type: String,
-    key?: any
 
-}
-interface InfoObject{
-    command:String,
-    actions:Array<Action>,
-    uuid:String
-}
+
 
 interface Props { 
-    info:InfoObject,
-    current:Boolean,
+    current:Current,
+    active:Boolean,
     setCurrent:Function,
     editAction:Function, 
     editModifier:Function, 
@@ -44,12 +34,12 @@ interface Props {
     moveDownCommand:Function
 }
 
-export default function Command({ info, moveDownCommand, moveUpCommand, setCurrent, current, editAction, editCommand, editModifier, deleteAction, deleteCommand }:Props) {
+export default function Command({ current, moveDownCommand, moveUpCommand, setCurrent, active, editAction, editCommand, editModifier, deleteAction, deleteCommand }:Props) {
 
-    const { command, actions, uuid }=info;
+    const { command, actions, uuid }=current;
     return (
         <motion.div
-        key={"animation"+uuid as any}
+        key={"animation"+uuid as key}
         initial={{ opacity:0, height:0 }}
         animate={{ opacity:1, height:'auto' }}
         exit={{ opacity:0, height:0 }}
@@ -58,7 +48,7 @@ export default function Command({ info, moveDownCommand, moveUpCommand, setCurre
          <Box
          
       sx={{
-        cursor: current?'default':'pointer',
+        cursor: active?'default':'pointer',
         display: 'flex',
         flexWrap: 'wrap',
         '& > :not(style)': {
@@ -71,8 +61,8 @@ export default function Command({ info, moveDownCommand, moveUpCommand, setCurre
     >
       
       
-    <Paper  onClick={()=>(!current&&setCurrent(uuid))} elevation={2}>
-    {current?(         
+    <Paper  onClick={()=>(!active&&setCurrent(uuid))} elevation={2}>
+    {active?(         
             <Grid sx={{borderBottom:"1px solid #333"}} container spacing={1}>   
             <Grid xs={10}>
                 <TextField onChange={(e)=>editCommand(e.target.value)} value={command} id="command" label="Command" variant="outlined" />
@@ -100,25 +90,25 @@ export default function Command({ info, moveDownCommand, moveUpCommand, setCurre
         {actions.map((item)=>{
             switch (item.type) {
                 case 'text':
-                    return(<Text moveDownCommand={moveDownCommand} moveUpCommand={moveUpCommand} value={item.value} uuid={item.uuid} current={current} editAction={editAction} key={item.uuid as React.Key} deleteAction={deleteAction} />)
+                    return(<Text moveDownCommand={moveDownCommand} moveUpCommand={moveUpCommand} value={item.value} uuid={item.uuid} active={active} editAction={editAction} key={item.uuid as React.Key} deleteAction={deleteAction} />)
                     break;
                 case 'key':
-                    return(<Key moveDownCommand={moveDownCommand} moveUpCommand={moveUpCommand} value={item.value} uuid={item.uuid} modifiers={item.modifiers} editModifier={editModifier} current={current} editAction={editAction} key={item.uuid as React.Key} deleteAction={deleteAction} />)
+                    return(<Key moveDownCommand={moveDownCommand} moveUpCommand={moveUpCommand} value={item.value} uuid={item.uuid} modifiers={item.modifiers} editModifier={editModifier} active={active} editAction={editAction} key={item.uuid as React.Key} deleteAction={deleteAction} />)
                     break;
                 case 'keyDown':
-                    return(<KeyDown moveDownCommand={moveDownCommand} moveUpCommand={moveUpCommand} value={item.value} uuid={item.uuid}  current={current} editAction={editAction} key={item.uuid as React.Key} deleteAction={deleteAction} />)
+                    return(<KeyDown moveDownCommand={moveDownCommand} moveUpCommand={moveUpCommand} value={item.value} uuid={item.uuid}  active={active} editAction={editAction} key={item.uuid as React.Key} deleteAction={deleteAction} />)
                     break;
                 case 'keyUp':
-                    return(<KeyUp moveDownCommand={moveDownCommand} moveUpCommand={moveUpCommand} value={item.value} uuid={item.uuid}  current={current} editAction={editAction} key={item.uuid as React.Key} deleteAction={deleteAction} />)
+                    return(<KeyUp moveDownCommand={moveDownCommand} moveUpCommand={moveUpCommand} value={item.value} uuid={item.uuid}  active={active} editAction={editAction} key={item.uuid as React.Key} deleteAction={deleteAction} />)
                     break;
                 case 'delay':
-                    return(<Delay moveDownCommand={moveDownCommand} moveUpCommand={moveUpCommand} value={item.value} uuid={item.uuid}  current={current} editAction={editAction} key={item.uuid as React.Key} deleteAction={deleteAction} />)
+                    return(<Delay moveDownCommand={moveDownCommand} moveUpCommand={moveUpCommand} value={item.value} uuid={item.uuid}  active={active} editAction={editAction} key={item.uuid as React.Key} deleteAction={deleteAction} />)
                     break;
                 case 'moveMouse':
-                    return(<MoveMouse moveDownCommand={moveDownCommand} moveUpCommand={moveUpCommand} value={item.value} uuid={item.uuid}  current={current} editAction={editAction} key={item.uuid as React.Key} deleteAction={deleteAction} />)
+                    return(<MoveMouse moveDownCommand={moveDownCommand} moveUpCommand={moveUpCommand} value={item.value} uuid={item.uuid}  active={active} editAction={editAction} key={item.uuid as React.Key} deleteAction={deleteAction} />)
                     break;
                 case 'mouseClick':
-                    return(<MouseClick legend={item.key} moveDownCommand={moveDownCommand} moveUpCommand={moveUpCommand} value={item.value} uuid={item.uuid}  current={current} editAction={editAction} key={item.uuid as React.Key} deleteAction={deleteAction} />)
+                    return(<MouseClick legend={item.legend as Legend} moveDownCommand={moveDownCommand} moveUpCommand={moveUpCommand} value={item.value} uuid={item.uuid}  active={active} editAction={editAction} key={item.uuid as React.Key} deleteAction={deleteAction} />)
                     break;
                 default:
                     

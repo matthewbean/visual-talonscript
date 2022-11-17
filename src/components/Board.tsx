@@ -8,7 +8,7 @@ export default function Board(props) {
 
     return (
         <>
-            <Grid sx={{p:3, width:'100vw'}} container spacing={4}>
+            <Grid sx={{mt:5, p:3, width:'100vw'}} container spacing={4}>
                 <Grid md={4} xs={12}>
                     <Commands />
                 </Grid>

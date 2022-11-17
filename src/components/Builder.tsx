@@ -2,15 +2,16 @@ import React, { useContext } from 'react'
 import AppContext from '../context/appContext';
 
 import Command from './Command'
- 
+import {StateTypes} from '../types/StateTypes'
 
 export default function Builder(props) {
     const appContext=useContext(AppContext)
-    const { current, moveDownCommand, setCurrent, editAction, moveUpCommand, editModifier, editCommand, deleteAction, deleteCommand }:any = appContext
+    const { current, setCurrent, editAction, editModifier, moveUpCommand, editCommand, deleteAction, moveDownCommand, deleteCommand }: StateTypes = appContext
+    console.log(appContext)
     return (
         <>
         <h2>Current Command:</h2>
-        {current&&<Command moveDownCommand={moveDownCommand} info={current} moveUpCommand={moveUpCommand} editCommand={editCommand} setCurrent={setCurrent} editAction={editAction} editModifier={editModifier} current={true} deleteAction={deleteAction} deleteCommand={deleteCommand} />}
+        {current&&<Command moveDownCommand={moveDownCommand} current={current} moveUpCommand={moveUpCommand} editCommand={editCommand} setCurrent={setCurrent} editAction={editAction} editModifier={editModifier} active={true} deleteAction={deleteAction} deleteCommand={deleteCommand} />}
         </>
     )
 }

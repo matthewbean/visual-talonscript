@@ -6,6 +6,7 @@ import PrintIcon from '@mui/icons-material/Print';
 
 import AppContext from '../context/appContext'
 
+import { StateTypes } from '../types/StateTypes';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -21,7 +22,7 @@ const style = {
 
 export default function PrintModal() {
     const appContext=useContext(AppContext)
-    const { printCommands, copyCommands }:any = appContext
+    const { printCommands, copyCommands }:StateTypes = appContext
  
   const [open, setOpen] = useState(false);
   const [print, setPrint] = useState('');

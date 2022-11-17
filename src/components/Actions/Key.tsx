@@ -13,14 +13,14 @@ import ChangeHistoryOutlinedIcon from '@mui/icons-material/ChangeHistoryOutlined
 import Select from '@mui/material/Select';
 
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
-
+import { Modifiers } from '../../types/StateTypes';
 
 
 interface Props { 
     value: String,
     uuid: String,
-    current:  Boolean,
-    modifiers: any,
+    active:  Boolean,
+    modifiers: Modifiers,
     editModifier: Function,
     editAction: Function,
     deleteAction: Function,
@@ -28,25 +28,25 @@ interface Props {
     moveDownCommand:Function
     }
 
-export default function Key({ moveDownCommand, moveUpCommand, uuid, value, current, editAction, modifiers, editModifier, deleteAction}:Props) {
+export default function Key({ moveDownCommand, moveUpCommand, uuid, value, active, editAction, modifiers, editModifier, deleteAction}:Props) {
     
 
     return (
         <>
-        {   current?
+        {   active?
             (
             <motion.li layout
-            key={"animation"+uuid as any}
+            key={"animation"+uuid as React.Key}
             initial={{ opacity:0, height:0 }}
             animate={{ opacity:1, height:'auto' }}
             exit={{ opacity:0, height:0 }}>
             <h2>Press Key:</h2>
             <Grid sx={{alignItems:'center'}} container spacing={1}>
                 <Grid xs={6}>
-                <FormControlLabel control={<Checkbox name='shift' onClick={(e:any)=>editModifier(uuid, e.target.name)} checked={modifiers.shift}/>}  label="Shift" />
-                <FormControlLabel control={<Checkbox name='ctrl' onClick={(e:any)=>editModifier(uuid, e.target.name)} checked={modifiers.ctrl}/>} label="Control" />
-                <FormControlLabel control={<Checkbox name='alt' onClick={(e:any)=>editModifier(uuid, e.target.name)} checked={modifiers.alt}/>} label="Option/Alt" />
-                <FormControlLabel control={<Checkbox name='super' onClick={(e:any)=>editModifier(uuid, e.target.name)} checked={modifiers.super}/>} label="Command/Windows" />
+                <FormControlLabel control={<Checkbox name='shift' onChange={(e:React.ChangeEvent<HTMLInputElement>)=>editModifier(uuid, e.target.name)} checked={modifiers.shift}/>}  label="Shift" />
+                <FormControlLabel control={<Checkbox name='ctrl' onChange={(e:React.ChangeEvent<HTMLInputElement>)=>editModifier(uuid, e.target.name)} checked={modifiers.ctrl}/>} label="Control" />
+                <FormControlLabel control={<Checkbox name='alt' onChange={(e:React.ChangeEvent<HTMLInputElement>)=>editModifier(uuid, e.target.name)} checked={modifiers.alt}/>} label="Option/Alt" />
+                <FormControlLabel control={<Checkbox name='super' onChange={(e:React.ChangeEvent<HTMLInputElement>)=>editModifier(uuid, e.target.name)} checked={modifiers.super}/>} label="Command/Windows" />
                 </Grid>
                 <Grid sx={{alignSelf:'flex-start'}} xs={4}>
                     <InputLabel id="demo-simple-select-label">Key</InputLabel>
@@ -112,7 +112,7 @@ export default function Key({ moveDownCommand, moveUpCommand, uuid, value, curre
                     </IconButton>
                 </Grid>
             </Grid></motion.li>):
-            (<Box sx={{m:1, ml:2}}>Press: "{value}"</Box>)      
+            (<Box sx={{m:1, ml:2}}>Press: "{modifiers.shift&&'shift-'}{modifiers.ctrl&&'ctrl-'}{modifiers.alt&&'alt-'}{modifiers.super&&'super-'}{value}"</Box>)      
         }
         </>
     )

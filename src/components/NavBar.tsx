@@ -13,7 +13,7 @@ export default function ButtonAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <PrintModal />
           <Link sx={{position:"fixed", top:"16px", right:"2rem"}} rel="noopener" target={"_blank"} href="https://github.com/matthewbean/visual-talonscript"><GitHubIcon></GitHubIcon></Link>

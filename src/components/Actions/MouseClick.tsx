@@ -9,32 +9,31 @@ import MenuItem from '@mui/material/MenuItem';
 import ChangeHistoryOutlinedIcon from '@mui/icons-material/ChangeHistoryOutlined';
 import Select from '@mui/material/Select';
 import { motion } from "framer-motion";
-
+import { Key } from 'react';
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
+import { Legend } from '../../types/StateTypes';
 
 
 
 interface Props { 
     value: any,
     uuid: String,
-    current:  Boolean,
+    active:  Boolean,
     editAction: Function,
     deleteAction: Function,
     moveUpCommand:Function,
     moveDownCommand:Function,
-    key:any,
-    legend:any
+    legend:Legend
     }
 
-export default function KeyDown({moveUpCommand, legend,  uuid, value, current, editAction, moveDownCommand, deleteAction }:Props) {
-    
+export default function KeyDown({moveUpCommand, legend,  uuid, value, active, editAction, moveDownCommand, deleteAction }:Props) {
 
     return (
         <>
         
-        {   current?
+        {   active?
             (<motion.li layout
-                key={"animation"+uuid as any}
+                key={"animation"+uuid as Key}
                 initial={{ opacity:0, height:0 }}
                 animate={{ opacity:1, height:'auto' }}
                 exit={{ opacity:0, height:0 }}>

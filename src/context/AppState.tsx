@@ -16,10 +16,16 @@ import{
     MOVE_DOWN,
     NEW_COMMAND
 } from './types'
+import { Legend, Modifiers } from '../types/StateTypes';
 
 //classes
 
 class Command {
+    command:String
+    actions:Array<any>
+    value:String
+    uuid:String
+    
     constructor(command=''){
         this.command=command;
         this.actions=[]
@@ -35,6 +41,9 @@ class Command {
 }
 
 class Text{
+    type:String
+    value:String
+    uuid:String
     constructor(text=''){
         this.type='text'
         this.value=text;
@@ -43,6 +52,12 @@ class Text{
 
 }
 class MoveMouse{
+    type:String
+    value:{
+        x:Number,
+        y:Number
+    }
+    uuid:String
     constructor(x=0,y=0){
         this.type='moveMouse'
         this.value={
@@ -54,12 +69,16 @@ class MoveMouse{
 }
 
 class MouseClick{
+     type:String
+    value:String
+    uuid:String
+    legend:Legend
     constructor(value='leftClick'){
         this.type='mouseClick'
         this.value=value;
         this.uuid=uuidv4();
 
-        this.key={
+        this.legend={
             leftClick:{
                 name:'Left Click',
                 print: `${tab}mouse_click(0)<br>`
@@ -95,7 +114,12 @@ class MouseClick{
 }
 
 class Key{
+    modifiers:Modifiers
+     type:String
+    value:String
+    uuid:String
     constructor(key='a'){
+        
         this.modifiers={
             shift: false,
             ctrl: false,
@@ -109,6 +133,10 @@ class Key{
 
 }
 class KeyDown{
+    type:String
+    value:String
+    uuid:String
+
     constructor(key='a'){
         this.type='keyDown'
         this.value=key;
@@ -118,6 +146,9 @@ class KeyDown{
 }
 
 class KeyUp{
+     type:String
+    value:String
+    uuid:String
     constructor(key='a'){
         this.type='keyUp'
         this.value=key;
@@ -126,6 +157,9 @@ class KeyUp{
  
 }
 class Delay{
+     type:String
+    value:Number
+    uuid:String
     constructor(value=0){
         this.type='delay'
         this.value=0;
@@ -167,7 +201,6 @@ const setCurrent=(id)=>{
 }
 //add action
 const createAction=(type)=>{
-    console.log(type)
     switch (type) {
         case 'text':
             dispatch({type: CREATE_ACTION, payload: new Text()})
@@ -188,7 +221,6 @@ const createAction=(type)=>{
             dispatch({type: CREATE_ACTION, payload: new MoveMouse()})
             break;
         case 'mouseClick':
-            console.log('works')
             dispatch({type: CREATE_ACTION, payload: new MouseClick()})
             break;
 
@@ -250,7 +282,11 @@ const printCommands=()=>{
                         string+= `${tab}"${action.value}"<br>`
                         break;
                     case 'key':
-                        string+= `${tab}key(${action.value})<br>`
+                        let modifiers=''
+                        for (const property in action.modifiers) {
+                            if(action.modifiers[property])modifiers+=`${property}-`
+                        }
+                        string+= `${tab}key(${modifiers}${action.value})<br>`
                         break;
                     case 'keyDown':
                         string+=`${tab}key(${action.value}:down)<br>`
@@ -265,7 +301,7 @@ const printCommands=()=>{
                         string+=`${tab}mouse_move(${action.value.x}, ${action.value.y})<br>`
                         break;
                     case 'mouseClick':
-                        string+=`${action.key[action.value].print}`
+                        string+=`${action.legend[action.value].print}`
                         break;
                 
                     default:
@@ -302,7 +338,7 @@ const printCommands=()=>{
                 string+=`${tab}mouse_move(${item.value.x}, ${item.value.y})<br>`
                 break;
             case 'mouseClick':
-                string+=`${item.key[item.value].print}`
+                string+=`${item.legend[item.value].print}`
                 break;
         
             default:
